@@ -28,6 +28,16 @@ public class UserRepository : IUserRepository
         return await this.context.Users.FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
     }
 
+    public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await this.context.Users
+            .Include(u => u.Posts)
+                .ThenInclude(p => p.Comments)
+            .Include(u => u.Comments)
+            .Include(u => u.Reactions)
+            .FirstOrDefaultAsync(u => u.EmailAddress == email, cancellationToken);
+    }
+
     public async Task AddUserAsync(User user, CancellationToken cancellationToken)
     {
         _ = await this.context.Users.AddAsync(user, cancellationToken);

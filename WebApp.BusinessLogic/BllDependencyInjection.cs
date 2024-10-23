@@ -29,5 +29,7 @@ public static class BllDependencyInjection
         _ = services.AddScoped<ICommentService, CommentService>();
         _ = services.AddScoped<IReactionService, ReactionService>();
         _ = services.AddScoped<ITagService, TagService>();
+        _ = services.AddSingleton<IEmailSender, EmailSenderService>();
+        _ = services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
     }
 }

@@ -11,6 +11,8 @@ public class CreatePostDto
 
     public string Content { get; set; } = string.Empty;
 
+    public string UserName { get; set; } = string.Empty;
+
 #pragma warning disable CA2227 // Collection properties should be read only
 #pragma warning disable IDE0028 // Simplify collection initialization
     public ICollection<TagDto> Tags { get; set; } = new List<TagDto>();

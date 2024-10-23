@@ -19,4 +19,8 @@ public interface IUserService
     Task SaveChangesAsync(CancellationToken cancellationToken);
 
     Task<string> UploadAvatarAsync(long userId, Stream avatarStream, string fileName, CancellationToken cancellationToken);
+
+    Task SendUpdateConfirmationEmailAsync(UpdateRequestModel model);
+
+    Task<bool> ConfirmUpdate(string email, string code, CancellationToken cancellationToken);
 }

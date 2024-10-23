@@ -41,6 +41,30 @@ public class PostRepository : IPostRepository
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
+    public async Task<Post?> GetPostByIdOrLinkAsync(string idOrLink)
+    {
+        if (long.TryParse(idOrLink, out long id))
+        {
+            return await this.context.Posts
+                .Include(p => p.Topic)
+            .Include(p => p.User)
+            .Include(p => p.Comments)
+            .Include(p => p.Reactions)
+            .Include(p => p.Tags)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+        else
+        {
+            return await this.context.Posts
+                .Include(p => p.Topic)
+            .Include(p => p.User)
+            .Include(p => p.Comments)
+            .Include(p => p.Reactions)
+            .Include(p => p.Tags)
+                .FirstOrDefaultAsync(p => p.Link == idOrLink);
+        }
+    }
+
     public async Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, int pageNumber, int pageSize)
     {
         return await this.context.Posts

@@ -23,4 +23,6 @@ public interface IPostService
     Task<IEnumerable<PostDto>> GetPopularPostsAsync(int count);
 
     Task<IEnumerable<PostDto>> SearchPostsByTitleAsync(string title, int page, int pageSize);
+
+    string GeneratePostLink(long postId, string userName, string title);
 }

@@ -33,6 +33,8 @@ public class PostDto
 
 #pragma warning disable CA1002 // Do not expose generic lists
     public List<string> Images { get; set; } = new List<string>();
+
+    public string Link { get; set; } = string.Empty;
 #pragma warning restore CA1002 // Do not expose generic lists
 #pragma warning restore IDE0028 // Simplify collection initialization
 #pragma warning restore CA2227 // Collection properties should be read only

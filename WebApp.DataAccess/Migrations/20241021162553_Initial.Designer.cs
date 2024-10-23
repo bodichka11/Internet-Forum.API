@@ -12,7 +12,7 @@ using WebApp.DataAccess.DataContext;
 namespace WebApp.DataAccess.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20241010234932_Initial")]
+    [Migration("20241021162553_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -86,6 +86,10 @@ namespace WebApp.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Images")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -274,8 +278,8 @@ namespace WebApp.DataAccess.Migrations
                         {
                             Id = 1L,
                             EmailAddress = "admin@qwerty.com",
-                            PasswordHash = "qfM3LFi6oHSL0HnteilqD6sA39TzkDp4X84J6AOC2Us=",
-                            PasswordSalt = "Me5YfcdamnXMPL3mrZlu8w==",
+                            PasswordHash = "wX2P2O8WKOyuTA8s8wRas7dZzeiNyix8A4W+WEIxDaw=",
+                            PasswordSalt = "oHUeqOetdBigD2VmGbiV9g==",
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = 0,

@@ -7,6 +7,8 @@ public interface IPostRepository
 
     Task<Post?> GetPostByIdAsync(long id);
 
+    Task<Post?> GetPostByIdOrLinkAsync(string idOrLink);
+
     Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, int pageNumber, int pageSize);
 
     Task CreatePostAsync(Post post);

@@ -174,7 +174,7 @@ public class UserController : ControllerBase
                 EmailAddress = currentUserUpdateDto.EmailAddress,
             };
             await this.userService.UpdateUserAsync(userUpdateDto, cancellationToken);
-            return this.Ok();
+            return this.Ok("Update initiated. Please check your email for confirmation.");
         }
         catch (ArgumentException ex)
         {
@@ -250,5 +250,23 @@ public class UserController : ControllerBase
             this.logger.LogError(ex, "Invalid operation error occurred while uploading avatar for user {UserId}", userId);
             return this.BadRequest("Operation not allowed.");
         }
+    }
+
+    [HttpPost("confirm-update")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ConfirmUpdate([FromBody] UpdateConfirmDto model, CancellationToken cancellationToken)
+    {
+        this.logger.LogInformation("Received confirm-update request for email: {Email} with code: {Code}", model.Email, model.Code);
+
+        var result = await this.userService.ConfirmUpdate(model.Email, model.Code, cancellationToken);
+
+        if (result)
+        {
+            this.logger.LogInformation("Update confirmed for email: {Email}", model.Email);
+            return Ok("Update confirmed and applied.");
+        }
+
+        this.logger.LogWarning("Invalid confirmation code for user with email {Email}", model.Email);
+        return BadRequest("Invalid confirmation code.");
     }
 }

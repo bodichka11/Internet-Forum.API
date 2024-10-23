@@ -127,6 +127,7 @@ public class PostController : ControllerBase
         {
             var createPostDto = this.mapper.Map<CreatePostDto>(createPostWithoutUserIdDto);
             createPostDto.UserId = long.Parse(userIdentifierClaim.Value, CultureInfo.InvariantCulture);
+            createPostDto.UserName = this.User.Identity.Name ?? "unknown";
 
             this.logger.LogInformation("Creating post for user {UserId}", createPostDto.UserId);
 

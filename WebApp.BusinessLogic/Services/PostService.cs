@@ -70,6 +70,11 @@ public class PostService : IPostService
         await this.postRepository.CreatePostAsync(post);
         await this.postRepository.SaveChangesAsync();
 
+        post.Link = GeneratePostLink(post.Id, createPostDto.UserName, createPostDto.Title);
+
+        await this.postRepository.UpdatePostAsync(post);
+        await this.postRepository.SaveChangesAsync();
+
         PostServiceLogging.PostCreated(this.logger, post.Title);
         return this.mapper.Map<PostDto>(post);
     }
@@ -174,6 +179,13 @@ public class PostService : IPostService
     private static void ValidateCreatePostParameters(CreatePostDto createPostDto)
     {
         ArgumentNullException.ThrowIfNull(createPostDto);
+    }
+
+    public string GeneratePostLink(long postId, string userName, string title)
+    {
+        string baseUrl = "https://localhost:7070";
+        string formattedTitle = title.Replace(" ", "-").Replace("?", "").Replace("!", "").Replace(".", "").Replace(",", "").ToLower();
+        return $"{baseUrl}/posts/{postId}?user={userName}&title={formattedTitle}";
     }
 
     private static void ValidateUpdatePostParameters(PostUpdateDto postUpdateDto)

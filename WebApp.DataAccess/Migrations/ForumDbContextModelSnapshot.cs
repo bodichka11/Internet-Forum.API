@@ -86,6 +86,10 @@ namespace WebApp.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -271,8 +275,8 @@ namespace WebApp.DataAccess.Migrations
                         {
                             Id = 1L,
                             EmailAddress = "admin@qwerty.com",
-                            PasswordHash = "qfM3LFi6oHSL0HnteilqD6sA39TzkDp4X84J6AOC2Us=",
-                            PasswordSalt = "Me5YfcdamnXMPL3mrZlu8w==",
+                            PasswordHash = "wX2P2O8WKOyuTA8s8wRas7dZzeiNyix8A4W+WEIxDaw=",
+                            PasswordSalt = "oHUeqOetdBigD2VmGbiV9g==",
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = 0,
