@@ -38,7 +38,7 @@ public class RabbitMqPublisher : IRabbitMqPublisher
         var message = new { ToEmail = toEmail, Subject = subject, Body = body };
         var bodyBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
 
-        channel.BasicPublish(exchange: "qwe", routingKey: this.queueName, basicProperties: null, body: bodyBytes);
+        channel.BasicPublish(exchange: "", routingKey: this.queueName, basicProperties: null, body: bodyBytes);
         Console.WriteLine($"Message published to RabbitMQ. Email: {toEmail}, Subject: {subject}, Body: {body}");
     }
 }
